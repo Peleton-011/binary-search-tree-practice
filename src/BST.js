@@ -8,7 +8,20 @@ export default class BinarySearchTree {
 			arr = arr.split(",").map((el) => Number(el.trim()));
 		return arr.sort().filter((el, index) => index == arr.indexOf(el));
 	}
-	buildTree(arr) {}
+    
+	buildTree(arr, start, end) {
+		if (!start) start = 0;
+		if (!end) end = arr.length - 1;
+		if (start > end) return null;
+
+		const middle = Math.round((start + end) / 2);
+
+		return new Node(
+			arr[middle],
+			buildTree(arr, start, mid - 1),
+			buildTree(arr, mid + 1, start)
+		);
+	}
 }
 
 class Node {
@@ -22,7 +35,7 @@ class Node {
 		return this._value;
 	}
 
-	constructor(val, right, left) {
+	constructor(val, left, right) {
 		this._value = val || null;
 		this._right = right || null;
 		this._left = left || null;
