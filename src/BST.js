@@ -1,4 +1,15 @@
-export default class BinarySearchTree {}
+export default class BinarySearchTree {
+	constructor(dataArr) {
+		this._root = buildTree(this._curateArr(dataArr));
+	}
+
+	_curateArr(arr) {
+		if (typeof arr === "string")
+			arr = arr.split(",").map((el) => Number(el.trim()));
+		return arr.sort().filter((el, index) => index == arr.indexOf(el));
+	}
+	buildTree(arr) {}
+}
 
 class Node {
 	/**
