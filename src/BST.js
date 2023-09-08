@@ -1,12 +1,14 @@
 export default class Tree {
-	constructor(dataArr) {
-		this._root = buildTree(this._curateArr(dataArr));
+	get root() {
+		return this._root;
 	}
 
 	curateArr(arr) {
-		if (typeof arr === "string")
-			arr = arr.split(",").map((el) => Number(el.trim()));
-		return arr.sort().filter((el, index) => index == arr.indexOf(el));
+		if (typeof arr === "string") arr = arr.split(",");
+		arr = arr.map((x) => Number(x));
+		return arr
+			.sort((a, b) => a - b)
+			.filter((el, index) => index == arr.indexOf(el));
 	}
 
 	buildTree(arr, start, end) {
@@ -18,8 +20,8 @@ export default class Tree {
 
 		return new Node(
 			arr[middle],
-			buildTree(arr, start, mid - 1),
-			buildTree(arr, mid + 1, start)
+			this.buildTree(arr, start, middle - 1),
+			this.buildTree(arr, middle + 1, end)
 		);
 	}
 
@@ -43,6 +45,9 @@ export default class Tree {
 			);
 		}
 	};
+	constructor(dataArr) {
+		this._root = null; //this.buildTree(this.curateArr(dataArr));
+	}
 }
 
 class Node {

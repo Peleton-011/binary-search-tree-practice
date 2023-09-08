@@ -8,18 +8,18 @@ function App() {
 		console.log(ans);
 	}
 
-	const BST = new Tree();
-
+    
 	const controlPanelData = {
-		functionList: [
-			{
-				func: (input) => {
-					return input;
+        functionList: [
+            {
+                func: (input) => {
+                    const BST = new Tree(input);
+                    return BST.curateArr(input)
+					BST.prettyPrint(BST.root);
 				},
 				funcName: "test",
 				inputName: "",
 			},
-			
 		],
 		setAnswer,
 	};
