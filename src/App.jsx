@@ -8,13 +8,11 @@ function App() {
 		console.log(ans);
 	}
 
-    
 	const controlPanelData = {
-        functionList: [
-            {
-                func: (input) => {
-                    const BST = new Tree(input);
-                    return BST.curateArr(input)
+		functionList: [
+			{
+				func: (input) => {
+					const BST = new Tree(input);
 					BST.prettyPrint(BST.root);
 				},
 				funcName: "test",

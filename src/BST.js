@@ -12,12 +12,12 @@ export default class Tree {
 	}
 
 	buildTree(arr, start, end) {
-		if (!start) start = 0;
-		if (!end) end = arr.length - 1;
 		if (start > end) return null;
 
-		const middle = Math.round((start + end) / 2);
+		// console.log(arr, ", ", start, ", ", end);
 
+		const middle = Math.round((start + end) / 2);
+		// console.log(middle, ", ", arr[middle]);
 		return new Node(
 			arr[middle],
 			this.buildTree(arr, start, middle - 1),
@@ -30,15 +30,15 @@ export default class Tree {
 			return;
 		}
 		if (node.right !== null) {
-			prettyPrint(
+			this.prettyPrint(
 				node.right,
 				`${prefix}${isLeft ? "│   " : "    "}`,
 				false
 			);
 		}
-		console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+		console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
 		if (node.left !== null) {
-			prettyPrint(
+			this.prettyPrint(
 				node.left,
 				`${prefix}${isLeft ? "    " : "│   "}`,
 				true
@@ -46,7 +46,9 @@ export default class Tree {
 		}
 	};
 	constructor(dataArr) {
-		this._root = null; //this.buildTree(this.curateArr(dataArr));
+		dataArr = this.curateArr(dataArr);
+		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
+		// this.prettyPrint(this._root)
 	}
 }
 
