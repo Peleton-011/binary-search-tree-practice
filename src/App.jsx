@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import ControlPanel from "./components/ControlPanel";
-import BinarySearchTree from "./BST";
+import Tree from "./BST";
 
 function App() {
 	function setAnswer(ans) {
 		console.log(ans);
 	}
 
-	const BST = new BinarySearchTree();
+	const BST = new Tree();
 
 	const controlPanelData = {
 		functionList: [

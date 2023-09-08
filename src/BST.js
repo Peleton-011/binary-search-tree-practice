@@ -1,14 +1,14 @@
-export default class BinarySearchTree {
+export default class Tree {
 	constructor(dataArr) {
 		this._root = buildTree(this._curateArr(dataArr));
 	}
 
-	_curateArr(arr) {
+	curateArr(arr) {
 		if (typeof arr === "string")
 			arr = arr.split(",").map((el) => Number(el.trim()));
 		return arr.sort().filter((el, index) => index == arr.indexOf(el));
 	}
-    
+
 	buildTree(arr, start, end) {
 		if (!start) start = 0;
 		if (!end) end = arr.length - 1;
@@ -22,6 +22,27 @@ export default class BinarySearchTree {
 			buildTree(arr, mid + 1, start)
 		);
 	}
+
+	prettyPrint = (node, prefix = "", isLeft = true) => {
+		if (node === null) {
+			return;
+		}
+		if (node.right !== null) {
+			prettyPrint(
+				node.right,
+				`${prefix}${isLeft ? "│   " : "    "}`,
+				false
+			);
+		}
+		console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+		if (node.left !== null) {
+			prettyPrint(
+				node.left,
+				`${prefix}${isLeft ? "    " : "│   "}`,
+				true
+			);
+		}
+	};
 }
 
 class Node {
