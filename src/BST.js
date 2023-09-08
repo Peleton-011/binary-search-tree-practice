@@ -45,6 +45,14 @@ export default class Tree {
 			);
 		}
 	};
+
+	insert(value, curr = this._root) {
+		let next;
+		while (next !== null) {
+			if (value > curr.value) next = curr.right;
+		}
+	}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
