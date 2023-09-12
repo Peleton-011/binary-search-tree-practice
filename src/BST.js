@@ -231,6 +231,15 @@ export default class Tree {
 		return getHeight(target);
 	}
 
+    isBalanced() {
+        
+    }
+
+	rebalance() {
+		const dataArr = inorder();
+		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
+	}
+
 	depth(value, curr = this._root) {
 		value = Number(value);
 

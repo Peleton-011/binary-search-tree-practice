@@ -79,6 +79,18 @@ function App() {
 				},
 				funcName: "height",
 				inputName: "",
+			},{
+				func: (input) => {
+					return BST.isBalanced(input);
+				},
+				funcName: "isBalanced",
+				inputName: "",
+			},{
+				func: (input) => {
+					return BST.rebalance(input);
+				},
+				funcName: "rebalance",
+				inputName: "",
 			},
 		],
 		setAnswer,
