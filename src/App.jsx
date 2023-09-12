@@ -35,6 +35,13 @@ function App() {
 				funcName: "delete",
 				inputName: "",
 			},
+			{
+				func: (input) => {
+					return BST.find(input);
+				},
+				funcName: "find",
+				inputName: "",
+			},
 		],
 		setAnswer,
 	};

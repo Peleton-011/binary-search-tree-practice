@@ -63,6 +63,20 @@ export default class Tree {
 
 	delete(value) {}
 
+	find(value, curr = this._root) {
+		value = Number(value);
+
+        let next;
+		while (next !== null) {
+			if (value > curr.value) next = "right";
+			if (value < curr.value) next = "left";
+			if (Number(value) === curr.value) return curr;
+
+			curr = curr[next];
+		}
+        return "not in the tree"
+	}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
