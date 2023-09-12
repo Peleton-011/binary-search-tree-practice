@@ -214,7 +214,22 @@ export default class Tree {
 		return result;
 	}
 
-	height(node) {}
+	height(value) {
+		const target = value ? this.find(Number(value)) : this._root;
+
+		function getHeight(node) {
+			// console.log(node)
+			if (node.left === null && node.right === null) return 0;
+			const leftHeight = node.left === null ? 0 : getHeight(node.left);
+			const rightHeight = node.right === null ? 0 : getHeight(node.right);
+
+			return Math.max(leftHeight, rightHeight) + 1;
+		}
+
+		// console.log(target);
+
+		return getHeight(target);
+	}
 
 	depth(value, curr = this._root) {
 		value = Number(value);
@@ -227,7 +242,7 @@ export default class Tree {
 			if (value < curr.value) next = "left";
 			if (Number(value) === Number(curr.value)) break;
 			curr = curr[next];
-            depth +=1
+			depth += 1;
 		}
 		if (Number(value) === Number(curr.value)) return depth;
 		return "not in the tree";
