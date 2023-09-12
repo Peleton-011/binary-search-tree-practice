@@ -99,12 +99,13 @@ export default class Tree {
 		value = Number(value);
 
 		let next;
-		while (curr[next] !== null) {
-			if (value > curr.value) next = "right";
-			if (value < curr.value) next = "left";
-			if (Number(value) === Number(curr.value)) break;
-			// console.log(curr);
-			// console.log(next);
+		while (true) {
+			const currVal = Number(curr.value);
+			if (value > currVal) next = "right";
+			if (value < currVal) next = "left";
+			if (value === currVal || curr[next] === null) {
+				break;
+			}
 			curr = curr[next];
 		}
 		if (Number(value) === Number(curr.value)) return curr;
@@ -166,7 +167,7 @@ export default class Tree {
 		return final;
 	}
 
-	inorder(callBack = (a) => a) {
+	inorder(callBack = (a) => a, parent = this._root) {
 		function getNodes(node) {
 			const res = [];
 
@@ -175,14 +176,14 @@ export default class Tree {
 			if (node.right) res.push(...getNodes(node.right));
 			return res;
 		}
-		const result = getNodes(this._root).map((e) => e.value);
+		const result = getNodes(parent).map((e) => e.value);
 
 		if (callBack) return result.map(callBack);
 
 		return result;
 	}
 
-	preorder(callBack = (a) => a) {
+	preorder(callBack = (a) => a, parent = this._root) {
 		function getNodes(node) {
 			const res = [];
 
@@ -191,14 +192,14 @@ export default class Tree {
 			if (node.right) res.push(...getNodes(node.right));
 			return res;
 		}
-		const result = getNodes(this._root).map((e) => e.value);
+		const result = getNodes(parent).map((e) => e.value);
 
 		if (callBack) return result.map(callBack);
 
 		return result;
 	}
 
-	postorder(callBack = (a) => a) {
+	postorder(callBack = (a) => a, parent = this._root) {
 		function getNodes(node) {
 			const res = [];
 
@@ -207,7 +208,7 @@ export default class Tree {
 			res.push(node);
 			return res;
 		}
-		const result = getNodes(this._root).map((e) => e.value);
+		const result = getNodes(parent).map((e) => e.value);
 
 		if (callBack) return result.map(callBack);
 
@@ -231,13 +232,25 @@ export default class Tree {
 		return getHeight(target);
 	}
 
-    isBalanced() {
-        
-    }
+	isBalanced(parent = this._root) {
+		const nodeList = this.inorder(parent).map((val) => this.find(val));
+		// console.log(nodeList);
+
+		return nodeList.every((node) => {
+			// console.log(node);
+			const leftHeight =
+				node.left === null ? 0 : this.height(node.left.value);
+			const rightHeight =
+				node.right === null ? 0 : this.height(node.right.value);
+			return Math.abs(leftHeight - rightHeight) < 2;
+		});
+	}
 
 	rebalance() {
-		const dataArr = inorder();
+		const dataArr = this.inorder();
+		// console.log(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
+		this.prettyPrint(this._root);
 	}
 
 	depth(value, curr = this._root) {
