@@ -214,6 +214,25 @@ export default class Tree {
 		return result;
 	}
 
+	height(node) {}
+
+	depth(value, curr = this._root) {
+		value = Number(value);
+
+		let depth = 0;
+
+		let next;
+		while (curr[next] !== null) {
+			if (value > curr.value) next = "right";
+			if (value < curr.value) next = "left";
+			if (Number(value) === Number(curr.value)) break;
+			curr = curr[next];
+            depth +=1
+		}
+		if (Number(value) === Number(curr.value)) return depth;
+		return "not in the tree";
+	}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);

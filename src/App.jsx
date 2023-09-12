@@ -67,6 +67,18 @@ function App() {
 				},
 				funcName: "post order",
 				inputName: "",
+			},{
+				func: (input) => {
+					return BST.depth(input);
+				},
+				funcName: "depth",
+				inputName: "",
+			},{
+				func: (input) => {
+					return BST.height(input);
+				},
+				funcName: "height",
+				inputName: "",
 			},
 		],
 		setAnswer,
