@@ -128,7 +128,7 @@ export default class Tree {
 	}
 
 	//Todo improve queue implementation
-	levelOrder() {
+	levelOrder(callBack) {
 		const queue = [this._root];
 		const result = [];
 
@@ -141,6 +141,8 @@ export default class Tree {
 
 			queue.shift();
 		}
+
+		if (callBack) return result.map(callBack);
 
 		return result;
 	}
