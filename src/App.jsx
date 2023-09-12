@@ -42,6 +42,13 @@ function App() {
 				funcName: "find",
 				inputName: "",
 			},
+			{
+				func: (input) => {
+					return BST.levelOrder(input);
+				},
+				funcName: "level order",
+				inputName: "",
+			},
 		],
 		setAnswer,
 	};

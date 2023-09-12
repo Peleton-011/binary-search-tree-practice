@@ -127,6 +127,24 @@ export default class Tree {
 		return "not in the tree";
 	}
 
+	//Todo improve queue implementation
+	levelOrder() {
+		const queue = [this._root];
+		const result = [];
+
+		while (queue.length) {
+			const curr = queue[0];
+			result.push(curr.value);
+
+			if (curr.left) queue.push(curr.left);
+			if (curr.right) queue.push(curr.right);
+
+			queue.shift();
+		}
+
+		return result;
+	}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
