@@ -7,15 +7,32 @@ function App() {
 	function setAnswer(ans) {
 		console.log(ans);
 	}
+	let BST;
 
 	const controlPanelData = {
 		functionList: [
 			{
 				func: (input) => {
-					const BST = new Tree(input);
+					BST = new Tree(input);
 					BST.prettyPrint(BST.root);
 				},
-				funcName: "test",
+				funcName: "create",
+				inputName: "",
+			},
+			{
+				func: (input) => {
+					BST.insert(input);
+					BST.prettyPrint(BST.root);
+				},
+				funcName: "insert",
+				inputName: "",
+			},
+			{
+				func: (input) => {
+					BST.delete(input);
+					BST.prettyPrint(BST.root);
+				},
+				funcName: "delete",
 				inputName: "",
 			},
 		],

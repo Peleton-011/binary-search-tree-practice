@@ -49,9 +49,19 @@ export default class Tree {
 	insert(value, curr = this._root) {
 		let next;
 		while (next !== null) {
-			if (value > curr.value) next = curr.right;
+			if (value > curr.value) next = "right";
+			if (value < curr.value) next = "left";
+			if (Number(value) === curr.value) return;
+
+			if (curr[next] === null) {
+				curr[next] = new Node(Number(value));
+				return;
+			}
+			curr = curr[next];
 		}
 	}
+
+	delete(value) {}
 
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
