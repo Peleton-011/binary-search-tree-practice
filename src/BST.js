@@ -166,6 +166,26 @@ export default class Tree {
 		return final;
 	}
 
+	inorder(callBack = (a) => a) {
+		function getNodes(node) {
+			const res = [];
+
+			if (node.left) res.push(...getNodes(node.left));
+			res.push(node);
+			if (node.right) res.push(...getNodes(node.right));
+			return res;
+		}
+		const result = getNodes(this._root).map((e) => e.value);
+
+		if (callBack) return result.map(callBack);
+
+		return result;
+	}
+
+	preorder(callBack) {}
+
+	postorder(callBack) {}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);

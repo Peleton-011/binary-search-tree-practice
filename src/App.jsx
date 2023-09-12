@@ -49,6 +49,25 @@ function App() {
 				funcName: "level order",
 				inputName: "",
 			},
+            {
+				func: (input) => {
+					return BST.inorder(input);
+				},
+				funcName: "in order",
+				inputName: "",
+			},{
+				func: (input) => {
+					return BST.preorder(input);
+				},
+				funcName: "pre order",
+				inputName: "",
+			},{
+				func: (input) => {
+					return BST.postorder(input);
+				},
+				funcName: "post order",
+				inputName: "",
+			},
 		],
 		setAnswer,
 	};
