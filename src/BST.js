@@ -182,9 +182,37 @@ export default class Tree {
 		return result;
 	}
 
-	preorder(callBack) {}
+	preorder(callBack = (a) => a) {
+		function getNodes(node) {
+			const res = [];
 
-	postorder(callBack) {}
+			res.push(node);
+			if (node.left) res.push(...getNodes(node.left));
+			if (node.right) res.push(...getNodes(node.right));
+			return res;
+		}
+		const result = getNodes(this._root).map((e) => e.value);
+
+		if (callBack) return result.map(callBack);
+
+		return result;
+	}
+
+	postorder(callBack = (a) => a) {
+		function getNodes(node) {
+			const res = [];
+
+			if (node.left) res.push(...getNodes(node.left));
+			if (node.right) res.push(...getNodes(node.right));
+			res.push(node);
+			return res;
+		}
+		const result = getNodes(this._root).map((e) => e.value);
+
+		if (callBack) return result.map(callBack);
+
+		return result;
+	}
 
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
