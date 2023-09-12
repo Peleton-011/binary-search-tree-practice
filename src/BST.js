@@ -147,6 +147,25 @@ export default class Tree {
 		return result;
 	}
 
+	recursiveLevelOrder(callBack) {
+		const result = [];
+
+		function addToResults(node, level) {
+			if (!result[level]) result.push([]);
+			result[level].push(node.value);
+			if (node.left) addToResults(node.left, level + 1);
+			if (node.right) addToResults(node.right, level + 1);
+		}
+
+		addToResults(this._root, 0);
+
+		const final = result.flat();
+
+		if (callBack) return final.map(callBack);
+
+		return final;
+	}
+
 	constructor(dataArr) {
 		dataArr = this.curateArr(dataArr);
 		this._root = this.buildTree(dataArr, 0, dataArr.length - 1);
