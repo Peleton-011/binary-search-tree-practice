@@ -61,7 +61,39 @@ export default class Tree {
 		}
 	}
 
-	delete(value) {}
+	delete(value) {
+		value = Number(value);
+		const curr = this.find(value);
+		const parent = this._findParent(value);
+		const relation = value > parent.value ? "right" : "left";
+		const children = [curr.left, curr.right];
+
+		function getLeftmost(node) {
+			let currLeftmost = node;
+			while (currLeftmost.left) {
+				currLeftmost = currLeftmost.left;
+			}
+			return currLeftmost;
+		}
+
+		// console.log(curr);
+		// console.log(children);
+		// console.log(children.every((child) => child !== null));
+
+		if (children.every((child) => child !== null)) {
+			// console.log(getLeftmost(curr.right));
+			const next = getLeftmost(curr.right);
+			const newVal = next.value;
+			this.delete(newVal);
+			curr.value = newVal;
+
+			return;
+		}
+		//For when the node to be deleted has less than 2 children
+		parent[relation] = curr.left === null ? curr.right : curr.left;
+
+		// console.log(parent);
+	}
 
 	find(value, curr = this._root) {
 		value = Number(value);
@@ -70,10 +102,14 @@ export default class Tree {
 		while (curr[next] !== null) {
 			if (value > curr.value) next = "right";
 			if (value < curr.value) next = "left";
-			if (Number(value) === curr.value) return curr;
-
+			if (Number(value) === Number(curr.value)) break;
+			// console.log(curr);
+			// console.log(next);
 			curr = curr[next];
 		}
+		if (Number(value) === Number(curr.value)) return curr;
+		// console.log(value, " ", typeof value);
+		// console.log(curr.value, " ", typeof curr.value);
 		return "not in the tree";
 	}
 
