@@ -66,15 +66,29 @@ export default class Tree {
 	find(value, curr = this._root) {
 		value = Number(value);
 
-        let next;
-		while (next !== null) {
+		let next;
+		while (curr[next] !== null) {
 			if (value > curr.value) next = "right";
 			if (value < curr.value) next = "left";
 			if (Number(value) === curr.value) return curr;
 
 			curr = curr[next];
 		}
-        return "not in the tree"
+		return "not in the tree";
+	}
+
+	_findParent(value, curr = this._root) {
+		value = Number(value);
+
+		let next;
+		while (curr[next] !== null) {
+			if (value > curr.value) next = "right";
+			if (value < curr.value) next = "left";
+			if (Number(value) === curr[next].value) return curr;
+
+			curr = curr[next];
+		}
+		return "not in the tree";
 	}
 
 	constructor(dataArr) {
